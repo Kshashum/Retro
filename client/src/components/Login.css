@@ -1,0 +1,54 @@
+.login_image{
+    width: 100%;
+    object-fit:fill;
+    z-index: -1;
+    margin-bottom: -475px;
+    max-height: 550px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    background-color:white;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 5% 2% 5% 2%;
+    border-radius:2%;
+    box-shadow:10px 10px 10px 2px black;
+    z-index: 1;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.2),#131A22);
+    justify-content: space-between;
+}
+.btn{
+    background: #f0c14b;
+    border-radius: 2px;
+    width: 60%;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid;
+    color: #111
+}
+.container > img {
+    width: 200px;
+    object-fit: contain;
+
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    max-width: 1500px;
+}
+.login_options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.login_form{
+    display: flex;
+    flex-direction: column;
+}
+.login_split{
+    display: flex;
+    flex-direction: column;
+}
