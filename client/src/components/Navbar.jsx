@@ -28,29 +28,68 @@ const Navbar = () => {
         }
       }));
     const classes = useStyles()
-    const [{cart,name,login,autocomplete}, dispatch]=useStateValue()
+    const [{cart,name,login,autocomplete,gte,lte,ord,clickSearch}, dispatch]=useStateValue()
     const history = useHistory()
     const [search, setsearch] = useState()
     const handleSearch=(e)=>{
-        e.preventDefault()
+        if(e){
+            e.preventDefault()
+        }
         if (search){
-            axios.get("http://localhost:4000/api/v1/search/",{ params: { query: search } }).then((res)=>{  
-            if(res.data.hits.length>0){
-                    dispatch({
-                        type:"SEARCH",
-                        item:res.data.hits.map((item)=>{return {...item._source,img:"https://source.unsplash.com/random/"}})
+            try{
+                axios.get("http://localhost:4000/api/v1/search/",{ params: { query:search, gte, lte, ord } }).then((res)=>{  
+                    if(res.data.hits.hits.length>0){
+                                dispatch({
+                                type:"SEARCH",
+                                item:{
+                                    searchlist:res.data.hits.hits.map((item)=>{return {...item._source,img:"https://source.unsplash.com/random/"}}),
+                                    price100_200:res.data.aggregations.Price_Filter.buckets[0].doc_count,
+                                    price200_300:res.data.aggregations.Price_Filter.buckets[1].doc_count,
+                                    price300_500:res.data.aggregations.Price_Filter.buckets[2].doc_count
+                                }
+                            })
+                            dispatch({
+                                type:"ADD_FILTER",
+                                item:{gte:0,lte:500}
+                            })
+                            dispatch({
+                                type:"SORT",
+                                item:""
+                            })
+                        }
+                    else{
+                        dispatch({
+                            type:"SEARCH",
+                            item:{
+                                searchlist:[],
+                                price100_200:0,
+                                price200_300:0,
+                                price300_500:0
+                            }
+                        })
+                    }
                     })
-                }
-            else{
+            }
+            catch(err){
+                console.log(err.message)
                 dispatch({
-                        type:"SEARCH",
-                        item:[]
-                    })
-                }
-            })
+                    type:"SEARCH",
+                    item:{
+                        searchlist:[],
+                        price100_200:0,
+                        price200_300:0,
+                        price300_500:0
+                    }
+                })
+            }
         }
         history.push('/s')
     }
+    useEffect(()=>{
+        if (clickSearch){
+            handleSearch(null)
+        }
+    },[clickSearch])
     useEffect(() => {
         if (search && search.length>2){
             axios.get("http://localhost:4000/api/v1/search/autosuggest",{ params: { SearchParam: search } }).then((res)=>{   
@@ -83,7 +122,7 @@ const Navbar = () => {
           <TextField {...params} label="Search" margin="normal" variant="filled" size="medium" value={search} onChange={(e)=>{setsearch(e.target.value)}} className={classes.root} />
         )}
       />
-      <Button onSubmit={(e)=>{handleSearch(e)}}><SearchIcon className="navbar_searchicon"/></Button>
+      <Button type="submit" onSubmit={(e)=>{handleSearch(e)}}><SearchIcon className="navbar_searchicon"/></Button>
             </form>
         <div className="navbar_head">
             {login?<div className="navbar_options">

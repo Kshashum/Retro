@@ -11,6 +11,25 @@ const elasticingest = async () =>{
     await client.indices.create({
         index: 'products',
         body: {
+            settings: {
+             analysis: {
+              filter: {
+                englishStopWords: {
+                type: "stop",
+                stopwords: "_english_"
+               }
+              },
+              analyzer: {
+               eventNameAnalyzer: {
+                tokenizer: "standard",
+                filter: [
+                 "lowercase",
+                 "englishStopWords"
+                ]
+               }
+              }
+            }
+          },
           mappings: {
             properties: {
               productid: { type: 'integer' },

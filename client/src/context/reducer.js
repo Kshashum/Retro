@@ -5,7 +5,14 @@ export const initialState = {
     name:"",
     userid:"",
     searchlist:[],
-    autocomplete:[]
+    autocomplete:[],
+    gte:0,
+    lte:400,
+    ord:"",
+    price100_200:0,
+    price200_300:0,
+    price300_500:0,
+    clickSearch:false
 }
 const removeitem = (cart,productid)=>{
     let res ={}
@@ -28,6 +35,22 @@ const removeitem = (cart,productid)=>{
 }
 const reducer = (state,action)=>{
     switch(action.type){
+        case "DO_SEARCH":
+            return {
+                ...state,
+                clickSearch:!state.clickSearch
+            }
+        case "SORT":
+            return {
+                ...state,
+                ord:action.item
+            }
+        case "ADD_FILTER":
+            return {
+                ...state,
+                gte: action.item.gte,
+                lte:action.item.lte
+            }
         case "ADD_TO_CART":
             return {
                 ...state,
@@ -46,7 +69,10 @@ const reducer = (state,action)=>{
         case "SEARCH":
             return {
                 ...state,
-                searchlist:action.item
+                searchlist:action.item.searchlist,
+                price100_200:action.item.price100_200,
+                price200_300:action.item.price200_300,
+                price300_500:action.item.price300_500
             }
         case "AUTOCOMPLETE":
             return {

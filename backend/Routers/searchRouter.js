@@ -1,7 +1,21 @@
 const client = require('../elastic/elastic')
 const searchRouter = require('express').Router()
 searchRouter.get('/', async (req,res)=>{
-    const {query} = req.query
+    const {query,gte,lte,ord} = req.query
+    const elsort = (ord) =>{
+      if (ord.length>0){
+      return {sort: [
+        {
+          price: {
+            order: ord
+          }
+        }
+      ] 
+      }}
+      else{
+        return{}
+      }
+    }
     try{
     const r = await client.search({
       index:'signals',
@@ -32,22 +46,52 @@ searchRouter.get('/', async (req,res)=>{
     const result = await client.search({
         index: 'products',
         body:{
-          query:{
-            bool:{
-              must:[{
-                multi_match:{
-                  query:query,
-                  fields:["name","manufacturer","longDescription","shortDescription"],
-                }
-              }],
-              should:boostquery
+          size: 10,
+          aggs: {
+            Price_Filter: {
+              range: {
+                field: "price",
+                ranges: [
+                  {
+                    from: 100,
+                    to: 200
+                  },
+                  {
+                    from: 200,
+                    to: 300
+                  },
+                  {
+                    from: 300,
+                    to: 400
+                  }                  
+                ]
+              }
             }
-          }
-        },
-        //filterPath:'hits.hits._source'        
-      })
+          },
+          query:{
+            bool: {
+              filter: [
+                {range: {
+                  price: {
+                    gte: gte,
+                    lte: lte
+                  }
+                }}
+              ], 
+              must: [
+                {multi_match: {
+                  query: query,
+                  fields: ["name","manufacturer","shortDescription","longDescription","upc"]
+                }}
+              ],
+              should: boostquery
+            } 
+          },
+          ...elsort(ord)      
+      }})
       if(result.body && result.body.hits){
-        res.json(result.body.hits).status(200)
+        console.log(result.body)
+        res.json(result.body).status(200)
       }
       else{
         res.json([]).status(200)

@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div className="home">
             <div className="home_container">
-            <img src={background} alt="background" className="home_image"/>
+            <img src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonMusic/2021/Marketing/EvergreenFree_DMUX-4110/Gateway/DV3A/US-EN_030121_FreeTierQ1Refresh_ACQ_GW_Hero_D_3000x1200_CV3._CB655482702_.jpg" alt="background" className="home_image"/>
             <div className="home_row">
                 <Product name={"Transformers DVD"}
                 productid={1500}
