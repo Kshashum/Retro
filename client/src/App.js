@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Search from './components/Search';
 import Item from './components/Item';
+import Order from './components/Order';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
     <div className="app">
       <Navbar />
       <Switch>
+      <Route path='/order/:orderid'>
+        <Order />
+      </Route>
       <Route path='/p/:productid'>
       <Item />
         </Route>

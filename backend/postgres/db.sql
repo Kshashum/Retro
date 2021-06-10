@@ -33,7 +33,11 @@ CREATE TABLE Ord(
     orderid BIGSERIAL,
     userid uuid REFERENCES Users(userid) ON DELETE CASCADE,
     cartid BIGINT REFERENCES Cart(cartid) ON DELETE CASCADE,
-    totalprice INT
+    name VARCHAR(255),
+    address VARCHAR(500),
+    pincode INT,
+    totalprice INT,
+    PRIMARY KEY (cartid)
 );
 CREATE TABLE Reviews(
     reviewid SERIAL PRIMARY KEY,

@@ -57,7 +57,7 @@ const elasticingest = async () =>{
           autocomplete_filter: {
           type: "edge_ngram",
           min_gram: 2,
-          max_gram: 10
+          max_gram: 5
           }
           },
           analyzer: {

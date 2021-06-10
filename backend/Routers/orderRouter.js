@@ -14,13 +14,13 @@ orderRouter.get('/',validate,async(req,res)=>{
     }
 })
 
-orderRouter.post('/:cartid',validate,async(req,res)=>{
+orderRouter.post('/',validate,async(req,res)=>{
     const userid = req.userid
-    const {cartid}=req.params.cartid
+    const {address,pincode,name,cartid}=req.body.body
     try {
-        const res = await pool.query("SELECT SUM(quantity*price) as s FROM CartItems INNER JOIN Products ON CartItems.productid = Products.productid WHERE CartItems.cartid = $1",[cartid])
-        const result = await pool.query("INSERT INTO Ord(userid,cartid,totalprice) VALUES ($1,$2,$3)",[userid,cartid,res.rows[0][s]])
-        res.status(200)
+        const mid = await pool.query("SELECT SUM(quantity*price) as s FROM CartItems INNER JOIN Products ON CartItems.productid = Products.productid WHERE CartItems.cartid = $1",[cartid])
+        const result = await pool.query("INSERT INTO Ord(userid,cartid,name,address,pincode,totalprice) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *",[userid,cartid,name,address,pincode,mid.rows[0].s])
+        res.json(result).status(200)
     } catch (err) {
         console.log(err)
         res.status(500)        

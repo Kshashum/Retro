@@ -1,6 +1,7 @@
 export const initialState = {
     login:false,
     cart:[],
+    removecart:[],
     token:null,
     name:"",
     userid:"",
@@ -62,16 +63,29 @@ const reducer = (state,action)=>{
                 ...state,
                 cart:[...state.cart,action.item]
             }
+        case "EMPTY_CART":
+            return {
+                ...state,
+                cartid:"",
+                cart:[],
+                removecart:[]
+            }
         case "REMOVE_FROM_CART":
             return {
                 ...state,
-                cart:state.cart.filter((item)=>{return item.productid !== action.item.productid})
+                cart:state.cart.filter((item)=>{return item.productid !== action.item.productid}),
+                removecart: [...state.removecart,action.item]
             }
         case "REDUCE_FROM_CART":
                 return{
                     ...state,
                     cart: removeitem(state.cart,action.item.productid)
                 }
+        case "DELETE_FROM_CART":
+            return{
+                ...state,
+                removecart:state.removecart.filter((item)=>{return item.productid !== action.item.productid})
+            }
         case "SEARCH":
             return {
                 ...state,

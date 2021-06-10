@@ -36,8 +36,7 @@ cartRouter.put('/',validate,async (req,res)=>{
             res.json(results).status(200)
         }
         else if(quantity === 0){
-            await pool.query("DELETE FROM CartItems WHERE productid=$1 AND cartid = $2",[productid,cartid])
-            const results = await pool.query("SELECT * FROM CartItems WHERE cartid = $1",[cartid])
+            const results = await pool.query("DELETE FROM CartItems WHERE productid=$1 AND cartid = $2",[productid,cartid])
             res.json(results).status(200)
         }
         else{
