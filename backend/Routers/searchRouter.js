@@ -90,7 +90,6 @@ searchRouter.get('/', async (req,res)=>{
           ...elsort(ord)      
       }})
       if(result.body && result.body.hits){
-        console.log(result.body)
         res.json(result.body).status(200)
       }
       else{
