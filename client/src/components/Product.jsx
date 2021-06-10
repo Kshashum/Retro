@@ -15,7 +15,7 @@ const Product = ({productid,name,shortDescription,price}) => {
                 name,
                 shortDescription,
                 price,
-                img:"https://source.unsplash.com/random/"
+                img:"https://source.unsplash.com/random/450x450/"
             }
         })
     }
@@ -31,7 +31,7 @@ const Product = ({productid,name,shortDescription,price}) => {
                 <small>$</small>
                 <strong>{price}</strong>
             </div>
-            <img src="https://source.unsplash.com/random/" alt='product' />
+            <img src="https://source.unsplash.com/random/450x450/" alt='product' />
             <Button variant="contained" color="primary" onClick={(e)=>{addtocart(e)}}>
                 Add to Cart
             </Button>

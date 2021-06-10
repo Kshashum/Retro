@@ -42,7 +42,7 @@ const Navbar = () => {
                                 dispatch({
                                 type:"SEARCH",
                                 item:{
-                                    searchlist:res.data.hits.hits.map((item)=>{return {...item._source,img:"https://source.unsplash.com/random/"}}),
+                                    searchlist:res.data.hits.hits.map((item)=>{return {...item._source,img:"https://source.unsplash.com/random/450x450/"}}),
                                     price100_200:res.data.aggregations.Price_Filter.buckets[0].doc_count,
                                     price200_300:res.data.aggregations.Price_Filter.buckets[1].doc_count,
                                     price300_500:res.data.aggregations.Price_Filter.buckets[2].doc_count

@@ -10,7 +10,7 @@ const Item = () => {
     const [data, setdata] = useState({productid:productid,name:"",price:0,shortdescription:"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",longdescription:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",img:"",manufacturer:""})
     const [reviews,setReviews] = useState([])
     const [review,setReview]=useState("")
-    const [rating,setRating]=useState(0)
+    const [rating,setRating]=useState("")
     const [reviewGiven,setReviewGiven]=useState(false)
     const [state,dispatch]=useStateValue()
     const addtocart = (e) =>{
@@ -52,7 +52,7 @@ const Item = () => {
                         shortdescription:res.data[0].shortdescription.length>6?res.data[0].shortdescription:data.shortdescription,
                         longdescription:res.data[0].longdescription.length>6?res.data[0].longdescription:data.longdescription,
                         manufacturer:res.data[0].length>4?res.data[0].manufacturer:data.manufacturer,
-                        img:"https://source.unsplash.com/random/"
+                        img:"https://source.unsplash.com/random/450x450/"
                     }
                 })
             }

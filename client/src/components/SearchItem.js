@@ -14,7 +14,7 @@ const SearchItem = ({productid,name,img,price}) => {
                 productid,
                 name,
                 price,
-                img:"https://source.unsplash.com/random/",
+                img:"https://source.unsplash.com/random/450x450/",
                 quantity:1
             }
         })

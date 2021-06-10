@@ -17,7 +17,7 @@
     border-radius:2%;
     box-shadow:10px 10px 10px 2px black;
     z-index: 1;
-    background-image: linear-gradient(to right, rgba(255,255,255,0.2),#131A22);
+    background-image: linear-gradient(to right, rgba(255,255,255,0.2),#0c317a);
     justify-content: space-between;
 }
 .btn{
