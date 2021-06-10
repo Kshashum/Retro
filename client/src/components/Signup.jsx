@@ -30,7 +30,6 @@ const Signup = () => {
                     name:data.name
                 }
             })
-            console.log(data)
         }).catch(err => { console.log(err.message) })
     }
 

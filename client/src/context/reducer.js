@@ -12,7 +12,8 @@ export const initialState = {
     price100_200:0,
     price200_300:0,
     price300_500:0,
-    clickSearch:false
+    clickSearch:false,
+    cartid:""
 }
 const removeitem = (cart,productid)=>{
     let res ={}
@@ -35,6 +36,11 @@ const removeitem = (cart,productid)=>{
 }
 const reducer = (state,action)=>{
     switch(action.type){
+        case "CARTID":
+            return {
+                ...state,
+                cartid: action.item
+            }
         case "DO_SEARCH":
             return {
                 ...state,

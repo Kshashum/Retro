@@ -11,7 +11,6 @@ const Search = () => {
     const [facet4,setFacet4] = useState(false)
     const [facet5,setFacet5] = useState(false)
     const handleChange = (e)=>{
-        console.log(e.target.name)
         if (e.target.name==='100_200'){
             setFacet1(true)
             setFacet2(false)

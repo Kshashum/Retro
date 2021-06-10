@@ -20,7 +20,7 @@ CREATE TABLE Products(
 CREATE TABLE Cart(
     cartid BIGSERIAL PRIMARY KEY,
     userid uuid REFERENCES Users(userid) ON DELETE CASCADE,
-    dataCreated DATE
+    dataCreated TIMESTAMP
 );
 CREATE TABLE CartItems(
     cartid BIGINT REFERENCES Cart(cartid) ON DELETE CASCADE,

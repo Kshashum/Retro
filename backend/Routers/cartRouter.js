@@ -17,8 +17,7 @@ cartRouter.get('/:cartid',validate, async (req,res)=>{
 cartRouter.post('/',validate,async(req,res)=>{
     const userid = req.userid
     try {
-        const now = Date()
-        const result = await pool.query("INSERT INTO Cart(userid,dateCreated) VALUES ($1,$2) RETRUNING *",[userid,now])
+        const result = await pool.query(`INSERT INTO Cart(userid,dataCreated) VALUES ($1,to_timestamp(${Date.now()} / 1000.0)) RETURNING *`,[userid])
         res.json(result).status(201)
         
     } catch (err) {
@@ -28,22 +27,22 @@ cartRouter.post('/',validate,async(req,res)=>{
 })
 
 cartRouter.put('/',validate,async (req,res)=>{
-    const {productid,quantity, cartid} = req.body
+    const {productid,quantity, cartid} = req.body.body
     try {
         const result = await pool.query("SELECT * FROM CartItems WHERE productid=$1 AND cartid=$2",[productid,cartid])
         if(result.rows.length === 0){
-            await pool.query("INSERT INTO CartItem(cartid,productid,quantity)",[cartid,productid,quantity])
-            const results = await pool.query("SELECT * FROM CartItem WHERE cartid = $1",[cartid])
+            await pool.query("INSERT INTO CartItems(cartid,productid,quantity) VALUES ($1,$2,$3)",[cartid,productid,quantity])
+            const results = await pool.query("SELECT * FROM CartItems WHERE cartid = $1",[cartid])
             res.json(results).status(200)
         }
         else if(quantity === 0){
-            await pool.query("DELETE FROM CartItem WHERE productid=$1 AND cartid = $2",[productid,cartid])
-            const results = await pool.query("SELECT * FROM CartItem WHERE cartid = $1",[cartid])
+            await pool.query("DELETE FROM CartItems WHERE productid=$1 AND cartid = $2",[productid,cartid])
+            const results = await pool.query("SELECT * FROM CartItems WHERE cartid = $1",[cartid])
             res.json(results).status(200)
         }
         else{
-            await pool.query("UPDATE SET quantity=$3 WHERE productid=$1 AND cartid=$2",[productid,cartid])
-            const results = await pool.query("SELECT * FROM CartItem WHERE cartid = $1",[cartid])
+            await pool.query("UPDATE Cartitems SET quantity=$3 WHERE productid=$1 AND cartid=$2",[productid,cartid,quantity])
+            const results = await pool.query("SELECT * FROM CartItems WHERE cartid = $1",[cartid])
             res.json(results).status(200)
         }        
     } catch (err) {

@@ -3,8 +3,9 @@ import './Cart.css'
 import { useStateValue } from '../context/StateContext';
 import CartItem from './CartItem';
 import {Typography} from '@material-ui/core'
+import {Link} from 'react-router-dom'
 const Cart = () => {
-    const [{cart}]= useStateValue()
+    const [{cart,login}]= useStateValue()
     const mapper = (item)=>{
         return <CartItem productid={item.productid} name={item.name} img={item.img} price={item.price}/>
     }
@@ -20,7 +21,9 @@ const Cart = () => {
             <div className="cart_right">
                 <div className="subtotal">
                     <p>Subtotal ({cart.length>0?cart.length:0} items): <strong>${cart.length>0?cart.reduce((total,item)=>{return total+parseInt(item.price)},0):0}</strong></p>
-                    <button>Proceed to check out</button>
+                    <Link to={login?'/checkout':'/login'}>
+                    <button class="cart_button">Proceed to check out</button>
+                    </Link>
                 </div>
             </div>
         </div>

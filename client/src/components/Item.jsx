@@ -18,7 +18,7 @@ const Item = () => {
         dispatch({
             type:"ADD_TO_CART",
             item:{
-                productid:data.productid,
+                productid:productid,
                 name:data.name,
                 shortDescription:data.shortDescription,
                 price:data.price,
