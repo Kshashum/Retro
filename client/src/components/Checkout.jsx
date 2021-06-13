@@ -11,21 +11,24 @@ const Checkout = () => {
     const [address,setAddress] = useState()
     const [pincode,setPincode] = useState()
     const history = useHistory()
-    useEffect(async ()=>{
+    const updateDb = async () => {
         if (state.cartid.length===0){
-        await axios.post('http://localhost:4000/api/v1/cart/',{},{
-            headers: {
-                token:state.token
-            }
-        }).then(res=>{
-            if(res.data.rows){
-                dispatch({
-                    type:"CARTID",
-                    item:res.data.rows[0].cartid
-                })
-            }
-        })
+            await axios.post('http://localhost:4000/api/v1/cart/',{},{
+                headers: {
+                    token:state.token
+                }
+            }).then(res=>{
+                if(res.data.rows){
+                    dispatch({
+                        type:"CARTID",
+                        item:res.data.rows[0].cartid
+                    })
+                }
+            })
+        }
     }
+    useEffect(()=>{
+        updateDb()
     },[state.cart])
     useEffect(()=>{
         if(state.cartid.length>0){
@@ -57,6 +60,7 @@ const Checkout = () => {
     }
     return (
         <div className="main_check">
+            <Typography  variant='h4' style={{marginTop:"5px"}}>Order Details</Typography>
             <form className="checkout_form" onSubmit={(e)=>{handleSubmit(e)}}>
             <Typography variant='p' style={{marginTop:"5px"}}>Name</Typography>
             <TextField value={name} onChange={(e)=>setName(e.target.value)}></TextField>
