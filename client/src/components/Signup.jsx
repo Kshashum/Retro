@@ -5,8 +5,7 @@ import { useHistory } from 'react-router-dom'
 import './Signup.css'
 import { useStateValue } from '../context/StateContext'
 import {TextField, Typography, Button} from '@material-ui/core'
-import background from '../background.jpeg'
-import logo from "../logo.png"
+import logo2 from "../logo2.png"
 
 const Signup = () => {
     const [{login},dispatch]=useStateValue()
@@ -35,7 +34,6 @@ const Signup = () => {
 
     return (
         <div className='signup'>
-        <img src={background} alt="background" className="signup_image"/>
         <div className="container" >
             <div className="signup_split">
             <Typography variant="h4">Sign up</Typography>
@@ -69,7 +67,7 @@ const Signup = () => {
                     <Button style={{backgroundColor: '#f0c14b', color: '#111', width:"30%",marginTop:"10px"}} onClick={handleSubmit}>Submit</Button>
             </form>
             </div>
-            <img src={logo} alt="logo" />
+            <img src={logo2} alt="logo" />
         </div>
         </div>
     )

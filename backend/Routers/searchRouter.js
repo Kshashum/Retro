@@ -46,7 +46,7 @@ searchRouter.get('/', async (req,res)=>{
     const result = await client.search({
         index: 'products',
         body:{
-          size: 10,
+          size: 40,
           aggs: {
             Price_Filter: {
               range: {
@@ -87,6 +87,19 @@ searchRouter.get('/', async (req,res)=>{
               should: boostquery
             } 
           },
+          rescore: {
+            window_size: 40,
+            query: {
+                rescore_query: {
+                    sltr: {
+                        params: {
+                            keywords: query
+                        },
+                        model: "my_xgboost_model"
+                    }
+                }
+            }
+        },
           ...elsort(ord)      
       }})
       if(result.body && result.body.hits){

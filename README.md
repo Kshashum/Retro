@@ -40,7 +40,7 @@ The backend is build using Node and express, There are Six routes
 <li>review Route</li>
 <li>search Route</li>
 </ol>
-We are using jwt for session management, Hotel Router has all the CRUD operation routes, User Router is used for login and signup routes, Review Router is used to add or remove reviews.
+We are using jwt for session management
 
 # Database
 

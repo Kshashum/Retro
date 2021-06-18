@@ -8,7 +8,7 @@
     max-height: 200px;
     min-width: 400px;
     z-index: 1;
-    background-color: #f3f3f3;
+    background-color: #dedfff;
 }
 .cartitem_img{
     max-height: 150px;
@@ -17,6 +17,15 @@
     margin-bottom: 15px;
 }
 .cartinfo > button{
+    align-items: right;
+    border-radius: 2px;
+    align-items: center;
+    justify-content: right;
+    width: 150px;
+    height: 30px;
+    margin-top: 10px;
+}
+.cartinfo_button{
     align-items: right;
     background: #f0c14b;
     border-radius: 2px;

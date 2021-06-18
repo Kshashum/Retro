@@ -22,7 +22,7 @@ const CartItem = ({productid,name,img,price}) => {
             <div className="cartinfo">
             <p>{name}</p>
             <p>Price <strong>${price}</strong></p>
-            <button className="btn" type="button" onClick={(e)=>{handleRemove(e)}}>Remove</button>
+            <button className="btn" type="cartinfo_button" onClick={(e)=>{handleRemove(e)}}>Remove</button>
             </div>
         </div>
     )

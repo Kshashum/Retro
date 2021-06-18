@@ -57,7 +57,7 @@ const elasticingest = async () =>{
           autocomplete_filter: {
           type: "edge_ngram",
           min_gram: 2,
-          max_gram: 5
+          max_gram: 10
           }
           },
           analyzer: {
@@ -78,6 +78,7 @@ const elasticingest = async () =>{
     })
     console.log("created index autosuggest")
       data = await pool.query("SELECT query as searchTerm FROM signals GROUP BY query ORDER BY COUNT(*) DESC")
+      //data = await pool.query("SELECT name as searchTerm FROM products")
       body = data.rows.flatMap(doc => [{ index: { _index: 'autosuggest' } }, doc])
       await client.bulk({ refresh: true, body })
   console.log("ingestion of data complete for index autosuggest")

@@ -4,8 +4,7 @@ import axios from 'axios'
 import './Login.css'
 import { useStateValue } from '../context/StateContext'
 import {TextField, Typography, Button} from '@material-ui/core'
-import background from '../background.jpeg'
-import logo from "../logo.png"
+import logo2 from "../logo2.png"
 
 const Login = () => {
     const [{login},dispatch] = useStateValue()
@@ -38,7 +37,6 @@ const Login = () => {
     }
     return (
         <div className='login'>
-        <img src={background} alt="background" className="login_image"/>
         <div className="container" >
             <div className="login_split">
             <Typography variant="h4">Login</Typography>
@@ -65,7 +63,7 @@ const Login = () => {
                     </Button></p>
             </form>
             </div>
-            <img src={logo} alt="logo"/>
+            <img src={logo2} alt="logo"/>
         </div>
         </div>
     )
