@@ -90,5 +90,5 @@ The start commands for the frontend and backend are provided in their individual
 
 ## Checkout Page
 
-<img src='./images/Checkout.png' style="width:1000px;height=700px"/>
+<img src='./images/Checkout.PNG' style="width:1000px;height=700px"/>
 <br />
