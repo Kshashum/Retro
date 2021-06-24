@@ -1,4 +1,4 @@
-const client = require('./elastic');
+const client = require('../elastic');
 const csv = require('csvtojson')
 const csvFilePath = './jllist.csv'
 const converter = require('json-2-csv');
