@@ -1,4 +1,4 @@
-# Retro
+# E Commerce Site
 
 # Client
 
@@ -40,7 +40,7 @@ The backend is build using Node and express, There are Six routes
 <li>review Route</li>
 <li>search Route</li>
 </ol>
-We are using jwt for session management
+We are using jwt for session management, We are using Elasticsearch learning to rank library with XGboost Model
 
 # Database
 
@@ -55,3 +55,40 @@ The start commands for the frontend and backend are provided in their individual
 <a href="https://github.com/Kshashum/HotelReviewsDocker/blob/main/backend/README.md" target="_blank">Backend</a>
 <br />
 <a href="https://github.com/Kshashum/Retro/blob/main/client/README.md">Frontend</a>
+
+# Images
+
+## Landing Page
+
+<img src='./images/landing.PNG' style="width:1000px;height=700px" />
+<br />
+
+## Login Page
+
+<img src='./images/login.PNG' style="width:1000px;height=700px"/>
+<br />
+
+## Signup Page
+
+<img src='./images/signup.PNG' style="width:1000px;height=700px"/>
+<br />
+
+## Search Page
+
+<img src='./images/searchpage.PNG' style="width:1000px;height=700px"/>
+<br />
+
+## Product Page
+
+<img src='./images/product.PNG' style="width:1000px;height=700px"/>
+<br />
+
+## Cart Page
+
+<img src='./images/cart.PNG' style="width:1000px;height=700px"/>
+<br />
+
+## Checkout Page
+
+<img src='./images/Checkout.png' style="width:1000px;height=700px"/>
+<br />
